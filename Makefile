@@ -1,9 +1,14 @@
+CC=aarch64-linux-android29-clang
+CFLAGS=-O2
+export CC CFLAGS
 build:
-	aarch64-linux-android29-clang -c fblib/fblib.c -o fblib/fblib.a
-	aarch64-linux-android29-clang -c test.c -o test.a
-	aarch64-linux-android29-clang fblib/fblib.a test.a -o fbdraw
+	make -C fblib
+	make -C test
+	$(CC) $(CFLAGS) fblib/fblib.a test/test.a -o fbdraw
 clean:
-	rm -f test.a fblib/fblib.a fbdraw
+	make -C fblib clean
+	make -C test clean
+	rm -f fbdraw
 	
 run: build headless
 	adb push fbdraw "//data/local/tmp"

@@ -7,8 +7,7 @@
 #include <linux/fb.h>
 #include <sys/mman.h>
 
-#include "../shared/image.h"
-#include "../shared/font.h"
+#include "../include/fblib.h"
 
 static int fbfd;
 static char* fbp;
